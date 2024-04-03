@@ -88,54 +88,54 @@ public class RNSubscriptionsAndroidModule extends ReactContextBaseJavaModule
   @ReactMethod
   public void checkBilling(final Callback cb) {
 
-    billingClient = BillingClient.newBuilder(this.reactContext).setListener(this).enablePendingPurchases().build();
-    billingClient.startConnection(new BillingClientStateListener() {
-
-      @Override
-      public void onBillingSetupFinished(BillingResult billingResult) {
-        Purchase.PurchasesResult purchasesResult = null;
-        Log.e(TAG, "onBillingSetupFinished: " + billingResult.getResponseCode());
-        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-          // The BillingClient is ready. You can query purchases here.
-          purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.SUBS);
-          Log.e(TAG, "sailee2 purchasesResult querypurchase: " + " purchasesResult: "
-              + purchasesResult.getResponseCode() + "list: " + purchasesResult.getPurchasesList());
-
-          billingClient.endConnection();
-          // try {
-          //   Purchase purchase = new Purchase();
-          // } catch (JSONException e) {
-          //   e.printStackTrace();
-          // }
-          if (purchasesResult.getPurchasesList().size() == 0) {
-            cb.invoke(null, null);
-          } else {
-            cb.invoke(null, purchasesResult.getPurchasesList().get(0).getPurchaseToken());
-          }
-
-        } else {
-          Log.e(TAG, "onBillingSetupFinished: 11");
-          billingClient.endConnection();
-          // cb.invoke("BillingClient is not ready", null);
-
-          try {
-            Log.e(TAG, "onBillingSetupFinished: 111");
-            cb.invoke(getErrorJson(billingResult), null);
-          } catch (Exception e) {
-            Log.e(TAG, "onBillingSetupFinished: 112");
-            e.printStackTrace();
-          }
-        }
-      }
-
-      @Override
-      public void onBillingServiceDisconnected() {
-        Log.e(TAG, "onBillingServiceDisconnected: 1");
-        // purchaseCB.invoke(getErrorJson(3), null);
-        billingClient.endConnection();
-      }
-    });
-    Log.e(TAG, "initBillingClient CALING: " + billingClient.isReady());
+//    billingClient = BillingClient.newBuilder(this.reactContext).setListener(this).enablePendingPurchases().build();
+//    billingClient.startConnection(new BillingClientStateListener() {
+//
+//      @Override
+//      public void onBillingSetupFinished(BillingResult billingResult) {
+//        Purchase.PurchasesResult purchasesResult = null;
+//        Log.e(TAG, "onBillingSetupFinished: " + billingResult.getResponseCode());
+//        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+//          // The BillingClient is ready. You can query purchases here.
+//          purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.SUBS);
+//          Log.e(TAG, "sailee2 purchasesResult querypurchase: " + " purchasesResult: "
+//              + purchasesResult.getResponseCode() + "list: " + purchasesResult.getPurchasesList());
+//
+//          billingClient.endConnection();
+//          // try {
+//          //   Purchase purchase = new Purchase();
+//          // } catch (JSONException e) {
+//          //   e.printStackTrace();
+//          // }
+//          if (purchasesResult.getPurchasesList().size() == 0) {
+//            cb.invoke(null, null);
+//          } else {
+//            cb.invoke(null, purchasesResult.getPurchasesList().get(0).getPurchaseToken());
+//          }
+//
+//        } else {
+//          Log.e(TAG, "onBillingSetupFinished: 11");
+//          billingClient.endConnection();
+//          // cb.invoke("BillingClient is not ready", null);
+//
+//          try {
+//            Log.e(TAG, "onBillingSetupFinished: 111");
+//            cb.invoke(getErrorJson(billingResult), null);
+//          } catch (Exception e) {
+//            Log.e(TAG, "onBillingSetupFinished: 112");
+//            e.printStackTrace();
+//          }
+//        }
+//      }
+//
+//      @Override
+//      public void onBillingServiceDisconnected() {
+//        Log.e(TAG, "onBillingServiceDisconnected: 1");
+//        // purchaseCB.invoke(getErrorJson(3), null);
+//        billingClient.endConnection();
+//      }
+//    });
+//    Log.e(TAG, "initBillingClient CALING: " + billingClient.isReady());
   }
 
   @Override
@@ -384,21 +384,21 @@ public class RNSubscriptionsAndroidModule extends ReactContextBaseJavaModule
    */
   public void purchaseDigitalProduct(String oldProduct, SkuDetails productToBuy, int prorationMode,
       String transactionReceipt) {
-    Log.e(TAG, "purchaseDigitalProduct: oldProduct: " + oldProduct + " productToBuy: " + productToBuy.getSku()
-        + "prorationMode: " + prorationMode + "transactionReceipt:" + transactionReceipt);
-    BillingFlowParams.Builder flowParams = BillingFlowParams.newBuilder();
-    flowParams.setSkuDetails(productToBuy);
-    if (oldProduct != null) { // && !oldProduct.equals(productToBuy.getSku())
-      Log.e(TAG, "purchaseDigitalProduct: " + "applying proration");
-      flowParams.setOldSku(oldProduct, transactionReceipt);
-      flowParams.setReplaceSkusProrationMode(
-          (prorationMode == 0) ? BillingFlowParams.ProrationMode.IMMEDIATE_WITH_TIME_PRORATION : prorationMode);
-    }
-
-    BillingResult responseCode2 = billingClient.launchBillingFlow(getReactApplicationContext().getCurrentActivity(),
-        flowParams.build());
-    Log.e(TAG,
-        "purchaseDigitalProduct:(0 = OK | 1 = USER CANCELED | 2-8 =ANY OTHER) " + responseCode2.getResponseCode());
+//    Log.e(TAG, "purchaseDigitalProduct: oldProduct: " + oldProduct + " productToBuy: " + productToBuy.getSku()
+//        + "prorationMode: " + prorationMode + "transactionReceipt:" + transactionReceipt);
+//    BillingFlowParams.Builder flowParams = BillingFlowParams.newBuilder();
+//    flowParams.setSkuDetails(productToBuy);
+//    if (oldProduct != null) { // && !oldProduct.equals(productToBuy.getSku())
+//      Log.e(TAG, "purchaseDigitalProduct: " + "applying proration");
+//      flowParams.setOldSku(oldProduct, transactionReceipt);
+//      flowParams.setReplaceSkusProrationMode(
+//          (prorationMode == 0) ? BillingFlowParams.ProrationMode.IMMEDIATE_WITH_TIME_PRORATION : prorationMode);
+//    }
+//
+//    BillingResult responseCode2 = billingClient.launchBillingFlow(getReactApplicationContext().getCurrentActivity(),
+//        flowParams.build());
+//    Log.e(TAG,
+//        "purchaseDigitalProduct:(0 = OK | 1 = USER CANCELED | 2-8 =ANY OTHER) " + responseCode2.getResponseCode());
 
   }
 
